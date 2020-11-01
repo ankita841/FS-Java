@@ -33,6 +33,10 @@ public class controller extends Calculator{
 			result -= num1;
 			str.replace(0, str.length(), Float.toString(result));
 			break;
+		case '%':
+			result = result / 100 * num1;
+			str.replace(0, str.length(), Float.toString(result));
+			break;
 		}
 	}
 	static void calc(ActionEvent e)
@@ -83,6 +87,11 @@ public class controller extends Calculator{
 			str.append(".");
 		if (e.getSource() == button_17)
 			str.append("0");
+		if (e.getSource() == button_18)
+		{
+			str.append('%');
+			q.add('%');
+		}
 		if (e.getSource() == button)
 		{
 			float k = Float.parseFloat(str.toString());
@@ -96,28 +105,30 @@ public class controller extends Calculator{
 			else
 			{
 				String num = "";
-				for (int i = 0; i < str.length(); i++)
+				String strTemp = str.toString();
+				for (int i = 0; i < strTemp.length(); i++)
 				{
-					if ((str.charAt(i) >= '0' && str.charAt(i) <= '9') || str.charAt(i) == '.')
-						num += str.charAt(i);
+					if ((strTemp.charAt(i) >= '0' && strTemp.charAt(i) <= '9') || strTemp.charAt(i) == '.')
+						num += strTemp.charAt(i);
 					else
 					{
 						num1 = Float.parseFloat(num);
-						System.out.println(num1);
-						num = "";
 						if (result == 0)
 							result = num1;
 						else
-							calculateAns(q.poll());						
+							calculateAns(q.poll());	
+						num = "";
 					}
 				}
-				num1 = Float.parseFloat(num);
-				System.out.println(num1);
-				if (result == 0)
-					result = num1;
-				else
-					if (!q.isEmpty())
-					calculateAns(q.poll());
+				if (num.length() > 0)
+				{
+					num1 = Float.parseFloat(num);
+					if (result == 0)
+						result = num1;
+					else
+						if (!q.isEmpty())
+							calculateAns(q.poll());
+				}
 				
 				num1 = 0;
 				q.clear();
