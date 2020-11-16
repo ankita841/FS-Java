@@ -4,13 +4,12 @@ import com.wipro.sales.bean.*;
 import com.wipro.sales.util.DBUtil;
 
 import java.sql.*;
-import java.util.*;
 
 public class StockDao {
 	PreparedStatement ps;
 	Connection con;
 	
-	void insertStock(Product sales)
+	public int insertStock(Product sales)
 	{
 		con = DBUtil.getDBConnection();
 		try
@@ -22,14 +21,16 @@ public class StockDao {
 			  ps.setDouble(4,  sales.getProductUnitPrice());
 			  ps.setInt(5, sales.getReorderLevel());
 			  ps.executeUpdate();
+			  return 1;
 		  }
 		  catch (Exception e)
 		  {
 			  e.printStackTrace();
 		  }
+		return 0;
 	}
 	
-	String generateProductID(String productName)
+	public String generateProductID(String productName)
 	{
 		try
 		{
@@ -45,9 +46,17 @@ public class StockDao {
 		return "";
 	}
 	
-	void updateStock(String productID, int soldQty)
+	public int updateStock(String productID, int soldQty) throws Exception
 	{
-		
+		con = DBUtil.getDBConnection();
+	    Statement st = con.createStatement();
+	    ResultSet rs = st.executeQuery("SELECT * from TBL_STOCK where productID='" + productID + "'");
+	    int value = rs.getInt("quantityOnHand") - soldQty;
+	    String record = "UPDATE TBL_STOCK SET quantityOnHand='" + value + "'WHERE productID='" + productID + "'";
+	    if(st.executeUpdate(record) == 1) {
+	      return 1;
+	    }
+	    return 0;
 	}
 	
 	Product getStock(String productID) throws Exception
@@ -64,18 +73,20 @@ public class StockDao {
 		return stock;
 	}
 	
-	void deleteStock(String productID)
+	public int deleteStock(String productID)
 	{
 		try
 		{
 			ps = con.prepareStatement("DELETE from TBL_STOCK where product_id=?");
 			ps.setString(1, productID);
 			ps.executeQuery();
+			return 1;
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 }
