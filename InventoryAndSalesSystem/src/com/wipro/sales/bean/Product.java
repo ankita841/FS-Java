@@ -5,7 +5,6 @@ public class Product {
 	int quantityOnHand, reorderLevel;
 	double productUnitPrice;
 	
-	
 	public String getProductID() {
 		return productID;
 	}

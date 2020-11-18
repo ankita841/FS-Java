@@ -1,9 +1,7 @@
 package com.wipro.sales.service;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
 import com.wipro.sales.bean.*;
-import com.wipro.sales.dao.SalesDao;
-import com.wipro.sales.dao.StockDao;
+import com.wipro.sales.dao.*;
 import com.wipro.sales.util.DBUtil;
 
 import java.sql.Connection;
@@ -14,7 +12,7 @@ import java.util.*;
 public class Administrator 
 {
 	
-	String insertStock(Product stockobj)
+	public static String insertStock(Product stockobj)
 	{
 		StockDao sd = new StockDao();
 		if (stockobj.getProductName().length() < 2)
@@ -30,7 +28,7 @@ public class Administrator
 		}
 	}
 	
-	String deleteStock(String ProductID)
+	public static String deleteStock(String ProductID)
 	{
 		StockDao sd = new StockDao();
 		if (sd.deleteStock(ProductID) == 1)
@@ -39,7 +37,7 @@ public class Administrator
 			return "Record cannot be deleted";
 	}
 	
-	String insertSales(Sales salesobj)
+	public static String insertSales(Sales salesobj)
 	{
 		Connection con = DBUtil.getDBConnection();
 		PreparedStatement ps;
@@ -61,7 +59,7 @@ public class Administrator
 				else
 				{
 					if (value < salesobj.getQuantitySold())
-						return "Not enogh stock on hand for sale.";
+						return "Not enough stock on hand for sale.";
 					else
 					{
 						Date currDate = new Date();
@@ -94,7 +92,7 @@ public class Administrator
 			return "Sales Object not valid for insertion";
 	}
 	
-	ArrayList<SalesReport> getSalesReport()
+	public static ArrayList<SalesReport> getSalesReport()
 	{
 		ArrayList<SalesReport> al = new ArrayList<>();
 		SalesDao sd = new SalesDao();
