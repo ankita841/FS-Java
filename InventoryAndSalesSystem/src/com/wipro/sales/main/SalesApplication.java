@@ -26,8 +26,8 @@ public class SalesApplication {
 			{
 			case 1:
 				Product stockobj = new Product();
-				System.out.print("Enter Product ID : ");
-				String productID = br.readLine();
+				//System.out.print("Enter Product ID : ");
+				//String productID = br.readLine();
 				System.out.print("\nEnter Product Name : ");
 				String productName = br.readLine();
 				System.out.print("\nEnter Quantity On Hand : ");
@@ -37,7 +37,7 @@ public class SalesApplication {
 				System.out.print("\nEnter Product Unit Price : ");
 				double productUnitPrice = Double.parseDouble(br.readLine());
 				System.out.println();
-				stockobj.setProductID(productID);
+				//stockobj.setProductID(productID);
 				stockobj.setProductName(productName);
 				stockobj.setQuantityOnHand(quantityOnHand);
 				stockobj.setReorderLevel(reorderLevel);
@@ -50,8 +50,6 @@ public class SalesApplication {
 				System.out.println(Administrator.deleteStock(proID));
 				break;
 			case 3:
-				System.out.print("Enter the Sales ID : ");
-				String salesID = br.readLine();
 				System.out.print("\nEnter the product ID : ");
 				String pID = br.readLine();
 				System.out.print("\nEnter the date : ");
@@ -63,7 +61,7 @@ public class SalesApplication {
 				double salesPricePerUnit = Double.parseDouble(br.readLine());
 				System.out.println();
 				Sales salesobj = new Sales();
-				salesobj.setSalesID(salesID);
+				//salesobj.setSalesID(salesID);
 				salesobj.setProductID(pID);
 				salesobj.setSalesDate(salesDate);
 				salesobj.setQuantitySold(quantitySold);

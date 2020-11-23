@@ -34,7 +34,7 @@ public class StockDao {
 	{
 		try
 		{
-			 ps = con.prepareStatement("SELECT last_number from user_sequences where sequence_name = '<SEQ_PRODUCT_ID>'");
+			 ps = con.prepareStatement("select SEQ_PRODUCT_ID.nextval from dual");
 			  ResultSet rs = ps.executeQuery();
 			  if (rs.next())
 				  return productName.substring(0, 2) + rs.getInt(1);			

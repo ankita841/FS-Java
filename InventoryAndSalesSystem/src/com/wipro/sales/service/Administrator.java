@@ -47,12 +47,12 @@ public class Administrator
 		{
 			try
 			{
-				ps = con.prepareStatement("select quantity_on_hand from TBL_STOCK where product_id =?");
+				ps = con.prepareStatement("select Quantity_On_Hand from ANKITA_1810991055.TBL_STOCK where Product_ID=?");
 				ps.setString(1, salesobj.getProductID());
 				ResultSet rs = ps.executeQuery();
 				int value = 0;
 				if (rs.next())
-					value = rs.getInt("quantity_on_hand");
+					value = rs.getInt("Quantity_On_Hand");
 				int temp = ps.executeUpdate();
 				if (temp == 0)
 					return "Product ID doeasn't exist.";

@@ -16,7 +16,7 @@ public class SalesDao {
 	  con = DBUtil.getDBConnection();
 	  try
 	  {
-		  ps = con.prepareStatement("INSERT into TBL_SALES values (?, ?, ?, ?, ?)");
+		  ps = con.prepareStatement("INSERT into ANKITA_1810991055.TBL_SALES values (?, ?, ?, ?, ?)");
 		  ps.setString(1, sales.getSalesID());
 		  java.sql.Date sqlDate = new java.sql.Date(sales.getSalesDate().getTime());
 		  ps.setDate(2,  sqlDate);
@@ -40,7 +40,7 @@ public class SalesDao {
 	  con = DBUtil.getDBConnection();
 	  try 
 	  {
-		  ps = con.prepareStatement("SELECT last_number from user_sequences where sequence_name = '<SEQ_SALES_ID>'");
+		  ps = con.prepareStatement("select ANKITA_1810991055.SEQ_SALES_ID.nextval from dual");
 		  ResultSet rs = ps.executeQuery();
 		  if (rs.next())
 			  return temp + "" + rs.getInt(1);
@@ -58,7 +58,7 @@ public class SalesDao {
 	  con = DBUtil.getDBConnection();
 	  try
 	  {
-		  ps = con.prepareStatement("SELECT * from V_SALES_REPORT");
+		  ps = con.prepareStatement("SELECT * from ANKITA_1810991055.V_SALES_REPORT");
 		  ResultSet rs = ps.executeQuery();
 		  while(rs.next()) 
 		  {
