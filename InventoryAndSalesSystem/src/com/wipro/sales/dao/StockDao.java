@@ -14,7 +14,7 @@ public class StockDao {
 		con = DBUtil.getDBConnection();
 		try
 		  {
-			  ps = con.prepareStatement("INSERT into TBL_SALES values (?, ?, ?, ?, ?)");
+			  ps = con.prepareStatement("INSERT into ANKITA_1810991055.TBL_STOCK values (?, ?, ?, ?, ?)");
 			  ps.setString(1, sales.getProductID());
 			  ps.setString(2,  sales.getProductName());
 			  ps.setInt(3,  sales.getQuantityOnHand());
@@ -32,9 +32,10 @@ public class StockDao {
 	
 	public String generateProductID(String productName)
 	{
+		con = DBUtil.getDBConnection();
 		try
 		{
-			 ps = con.prepareStatement("select SEQ_PRODUCT_ID.nextval from dual");
+			 ps = con.prepareStatement("select ANKITA_1810991055.SEQ_PRODUCT_ID.nextval from dual");
 			  ResultSet rs = ps.executeQuery();
 			  if (rs.next())
 				  return productName.substring(0, 2) + rs.getInt(1);			
@@ -50,7 +51,7 @@ public class StockDao {
 	{
 		con = DBUtil.getDBConnection();
 	    Statement st = con.createStatement();
-	    ResultSet rs = st.executeQuery("SELECT * from TBL_STOCK where productID='" + productID + "'");
+	    ResultSet rs = st.executeQuery("SELECT * from ANKITA_1810991055.TBL_STOCK where productID='" + productID + "'");
 	    int value = rs.getInt("quantityOnHand") - soldQty;
 	    String record = "UPDATE TBL_STOCK SET quantityOnHand='" + value + "'WHERE productID='" + productID + "'";
 	    if(st.executeUpdate(record) == 1) {
@@ -64,7 +65,7 @@ public class StockDao {
 		Product stock = new Product();
 		con = DBUtil.getDBConnection();
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM TBL_STOCK WHERE productID='" + productID + "'");
+		ResultSet rs = st.executeQuery("SELECT * FROM ANKITA_1810991055.TBL_STOCK WHERE productID='" + productID + "'");
 	    stock.setProductID(rs.getString("productID"));
 	    stock.setProductName(rs.getNString("productName"));
 	    stock.setQuantityOnHand(rs.getInt("quantityOnHand"));
@@ -77,7 +78,7 @@ public class StockDao {
 	{
 		try
 		{
-			ps = con.prepareStatement("DELETE from TBL_STOCK where product_id=?");
+			ps = con.prepareStatement("DELETE from ANKITA_1810991055.TBL_STOCK where product_id=?");
 			ps.setString(1, productID);
 			ps.executeQuery();
 			return 1;

@@ -1,6 +1,5 @@
 package com.wipro.sales.main;
 
-import java.io.BufferedReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -26,8 +25,6 @@ public class SalesApplication {
 			{
 			case 1:
 				Product stockobj = new Product();
-				//System.out.print("Enter Product ID : ");
-				//String productID = br.readLine();
 				System.out.print("\nEnter Product Name : ");
 				String productName = br.readLine();
 				System.out.print("\nEnter Quantity On Hand : ");
@@ -35,7 +32,12 @@ public class SalesApplication {
 				System.out.print("\nEnter Reorder Level : ");
 				int reorderLevel = Integer.parseInt(br.readLine());
 				System.out.print("\nEnter Product Unit Price : ");
-				double productUnitPrice = Double.parseDouble(br.readLine());
+				double productUnitPrice = 0;
+				try {
+					productUnitPrice = Double.parseDouble(br.readLine());
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
 				System.out.println();
 				//stockobj.setProductID(productID);
 				stockobj.setProductName(productName);
@@ -58,7 +60,12 @@ public class SalesApplication {
 				System.out.print("\nEnter Quantity Sold : ");
 				int quantitySold = Integer.parseInt(br.readLine());
 				System.out.print("\nEnter Sales Per Unit Price : ");
-				double salesPricePerUnit = Double.parseDouble(br.readLine());
+				double salesPricePerUnit = 0;
+				try {
+					salesPricePerUnit = Double.parseDouble(br.readLine());
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
 				System.out.println();
 				Sales salesobj = new Sales();
 				//salesobj.setSalesID(salesID);

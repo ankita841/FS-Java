@@ -19,10 +19,10 @@ public class Administrator
 			return "Data not valid for insertion";
 		else
 		{			
-			String generateID = sd.generateProductID(stockobj.getProductName());
-			stockobj.setProductID(generateID);
-			if (sd.insertStock(stockobj) == 1)
-				return "Record with Product ID : " + generateID +" generated successfully.";
+			String generatedID = sd.generateProductID(stockobj.getProductName());
+			stockobj.setProductID(generatedID);
+			if (sd.insertStock(stockobj) == 0)
+				return "Record with Product ID : " + generatedID +", generated successfully.";
 			else
 				return "Data not valid for insertion";
 		}
