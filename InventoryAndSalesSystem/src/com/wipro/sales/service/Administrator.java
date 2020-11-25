@@ -16,12 +16,12 @@ public class Administrator
 	{
 		StockDao sd = new StockDao();
 		if (stockobj.getProductName().length() < 2)
-			return "Data not valid for insertion";
+			return "Data not valid for insertion, Product's Name length less than 2.";
 		else
 		{			
 			String generatedID = sd.generateProductID(stockobj.getProductName());
 			stockobj.setProductID(generatedID);
-			if (sd.insertStock(stockobj) == 0)
+			if (sd.insertStock(stockobj) == 1)
 				return "Record with Product ID : " + generatedID +", generated successfully.";
 			else
 				return "Data not valid for insertion";
@@ -47,7 +47,7 @@ public class Administrator
 		{
 			try
 			{
-				ps = con.prepareStatement("select Quantity_On_Hand from ANKITA_1810991055.TBL_STOCK where Product_ID=?");
+				ps = con.prepareStatement("select Quantity_On_Hand from TBL_STOCK where Product_ID=?");
 				ps.setString(1, salesobj.getProductID());
 				ResultSet rs = ps.executeQuery();
 				int value = 0;

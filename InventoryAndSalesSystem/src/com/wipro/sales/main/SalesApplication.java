@@ -1,6 +1,5 @@
 package com.wipro.sales.main;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.*;
@@ -39,7 +38,6 @@ public class SalesApplication {
 					e.printStackTrace();
 				} 
 				System.out.println();
-				//stockobj.setProductID(productID);
 				stockobj.setProductName(productName);
 				stockobj.setQuantityOnHand(quantityOnHand);
 				stockobj.setReorderLevel(reorderLevel);
