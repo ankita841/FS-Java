@@ -40,14 +40,13 @@ public class Administrator
 	public static String insertSales(Sales salesobj)
 	{
 		Connection con = DBUtil.getDBConnection();
-		PreparedStatement ps;
 		SalesDao saleDao = new SalesDao();
 		StockDao stockDao = new StockDao();
 		if (salesobj != null)
 		{
 			try
 			{
-				ps = con.prepareStatement("select Quantity_On_Hand from TBL_STOCK where Product_ID=?");
+				PreparedStatement ps = con.prepareStatement("SELECT Quantity_On_Hand from TBL_STOCK where Product_ID=?");
 				ps.setString(1, salesobj.getProductID());
 				ResultSet rs = ps.executeQuery();
 				int value = 0;
@@ -69,9 +68,9 @@ public class Administrator
 						else
 						{
 							salesobj.setSalesID(saleDao.generateSalesID(tempDate));
-							if (saleDao.insertSales(salesobj) != 0)
+							if (saleDao.insertSales(salesobj) == 1)
 							{
-								if (stockDao.updateStock(salesobj.getProductID(), salesobj.getQuantitySold()) != 0)
+								if (stockDao.updateStock(salesobj.getProductID(), salesobj.getQuantitySold()) == 1)
 									return "Sales successfully completed.";
 								else
 									return "Error!";

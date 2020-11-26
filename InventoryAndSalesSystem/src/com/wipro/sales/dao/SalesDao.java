@@ -12,24 +12,24 @@ public class SalesDao {
   
   public int insertSales(Sales sales)
   {
-	  int temp = 0;
 	  con = DBUtil.getDBConnection();
 	  try
 	  {
-		  ps = con.prepareStatement("INSERT into ANKITA_1810991055.TBL_SALES values (?, ?, ?, ?, ?)");
+		  ps = con.prepareStatement("INSERT into TBL_SALES values (?, ?, ?, ?, ?)");
 		  ps.setString(1, sales.getSalesID());
 		  java.sql.Date sqlDate = new java.sql.Date(sales.getSalesDate().getTime());
 		  ps.setDate(2,  sqlDate);
 		  ps.setString(3,  sales.getProductID());
 		  ps.setInt(4,  sales.getQuantitySold());
 		  ps.setDouble(5, sales.getSalesPricePerUnit());
-		  temp = ps.executeUpdate();
+		  ps.executeUpdate();
+		  return 1;
 	  }
 	  catch (Exception e)
 	  {
 		  e.printStackTrace();
 	  }
-	  return temp;
+	  return 0;
   }
   
   public String generateSalesID(java.util.Date salesDate)
@@ -40,7 +40,7 @@ public class SalesDao {
 	  con = DBUtil.getDBConnection();
 	  try 
 	  {
-		  ps = con.prepareStatement("select ANKITA_1810991055.SEQ_SALES_ID.nextval from dual");
+		  ps = con.prepareStatement("SELECT ANKITA_1810991055.SEQ_SALES_ID.nextval from dual");
 		  ResultSet rs = ps.executeQuery();
 		  if (rs.next())
 			  return temp + "" + rs.getInt(1);

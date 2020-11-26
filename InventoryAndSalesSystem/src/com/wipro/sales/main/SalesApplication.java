@@ -66,7 +66,6 @@ public class SalesApplication {
 				} 
 				System.out.println();
 				Sales salesobj = new Sales();
-				//salesobj.setSalesID(salesID);
 				salesobj.setProductID(pID);
 				salesobj.setSalesDate(salesDate);
 				salesobj.setQuantitySold(quantitySold);
@@ -74,7 +73,10 @@ public class SalesApplication {
 				System.out.println(Administrator.insertSales(salesobj));
 				break;
 			case 4:
-				System.out.println("Following is the Sales Report : \n" + Administrator.getSalesReport());				
+				System.out.println("Following is the Sales Report : \n");
+				ArrayList<SalesReport> al = Administrator.getSalesReport();
+				for (SalesReport e : al)
+					System.out.println(e);
 				break;
 			default :
 				System.out.println("\nSelect from choices listed below.\n");

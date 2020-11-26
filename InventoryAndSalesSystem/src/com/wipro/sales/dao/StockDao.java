@@ -54,14 +54,25 @@ public class StockDao {
 	public int updateStock(String productID, int soldQty) throws Exception
 	{
 		con = DBUtil.getDBConnection();
-	    Statement st = con.createStatement();
-	    ResultSet rs = st.executeQuery("SELECT * from TBL_STOCK where productID='" + productID + "'");
-	    int value = rs.getInt("quantityOnHand") - soldQty;
-	    String record = "UPDATE TBL_STOCK SET quantityOnHand='" + value + "'WHERE productID='" + productID + "'";
-	    if(st.executeUpdate(record) == 1) {
-	      return 1;
-	    }
-	    return 0;
+		try
+		{
+			PreparedStatement st = con.prepareStatement("select quantity_on_hand from TBL_STOCK where product_id=?");
+			st.setString(1, productID);
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int newQuantity = rs.getInt("quantity_on_hand") - soldQty;
+			st=con.prepareStatement("update TBL_STOCK set quantity_on_hand=? where product_id=?");
+			st.setInt(1, newQuantity);
+			st.setString(2,productID);
+			st.executeUpdate();
+			return 1;
+			
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	Product getStock(String productID) throws Exception
@@ -69,12 +80,12 @@ public class StockDao {
 		Product stock = new Product();
 		con = DBUtil.getDBConnection();
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM TBL_STOCK WHERE productID='" + productID + "'");
-	    stock.setProductID(rs.getString("productID"));
-	    stock.setProductName(rs.getNString("productName"));
-	    stock.setQuantityOnHand(rs.getInt("quantityOnHand"));
-	    stock.setProductUnitPrice(rs.getDouble("productUnitPrice"));
-	    stock.setReorderLevel(rs.getInt("reorderLevel"));
+		ResultSet rs = st.executeQuery("SELECT * FROM TBL_STOCK WHERE Product_ID='" + productID + "'");
+	    stock.setProductID(rs.getString("Product_ID"));
+	    stock.setProductName(rs.getNString("Product_Name"));
+	    stock.setQuantityOnHand(rs.getInt("Quantity_On_Hand"));
+	    stock.setProductUnitPrice(rs.getDouble("Product_Unit_Price"));
+	    stock.setReorderLevel(rs.getInt("Reorder_Level"));
 		return stock;
 	}
 	

@@ -10,7 +10,7 @@ public class DBUtil {
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ANKITA_1810991055", "@");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ANKITA_1810991055", "");
 		}
 		catch (Exception e)
 		{

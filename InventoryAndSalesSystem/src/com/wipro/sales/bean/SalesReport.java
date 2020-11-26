@@ -57,5 +57,11 @@ public class SalesReport {
 	public void setProfitAmount(double profitAmount) {
 		this.profitAmount = profitAmount;
 	}
+	public String toString()
+	{
+		return " | " + salesID + " | " + salesDate + " | " + productID + " | " + productName + " | " + 
+				quantitySold + " | " + productUnitPerPrice + " | " + salesPricePerUnit 
+				+ " | " + profitAmount +" |";
+	}
 
 }
