@@ -16,7 +16,7 @@ public class RDAccount extends Account {
 	{
 		if (age < 60)
 		{
-			System.out.println("This is a senior citizen account : ");
+			System.out.println("This is a general account : ");
 			if (noOfMonths == 6)
 				this.interestRate = 7.5;
 			else if (noOfMonths == 9)
@@ -32,7 +32,7 @@ public class RDAccount extends Account {
 		}
 		else
 		{
-			System.out.println("This is a general account : ");
+			System.out.println("This is a senior citizen account : ");
 			if (noOfMonths == 6)
 				this.interestRate = 8;
 			else if (noOfMonths == 9)
